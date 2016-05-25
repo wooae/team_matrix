@@ -5,6 +5,7 @@ Team Matrix
 """
 
 import numpy as np
+import json
 
 class Txn(object):
 	"""
@@ -21,11 +22,29 @@ class Txn(object):
 		self.addrout = addrout
 		self.time = time
 
-class Cluster(object):
+class Node(object):
+	"""
+	Represents a transaction to be placed in a linked list
+	"""
+	def __init__ (self, data, next_node):
+		"""
+		Initialize node with data and next node
+		"""
+
+	def get_data(self):
+		return self.data
+
+	def get_next(self):
+		return self.next_node
+
+	def set_next(self, new):
+		self.next_node = new
+
+class TxnList(object):
 	"""
 	A Cluster is a set of Txns
 	"""
-	def __init__(self, txns):
+	def __init__(self, head):
 		"""
 		Txns of a cluster are saved in a list, self.txns
 		"""
@@ -33,3 +52,25 @@ class Cluster(object):
 
 	def sortTxns(self):
 		"""
+		Returns list of transactions, sorted in ascending order by value in
+		"""
+		return sorted(txns, key=txns[1])
+
+def findLoop(head):
+	turtle = head
+	hare = head
+
+	while hare != None:
+		turtle = turtle.next
+
+		if hare.next != None:
+			hare = hare.next.next
+		else:
+			return False
+
+		if turtle == hare:
+			return True
+
+if __name__ == "__main__":
+
+	

@@ -60,7 +60,7 @@ def getData(jname):
 	"""
 	Transform json data into Txn object format
 	"""
-	Jdata = json.loads(jname)
+	Jdata = json.loads(open(jname))
 	new_txn = Txn()
 	for txn in Jdata["vin"]:
 		new_txn.addrin.append(Jdata["addr"])
@@ -70,6 +70,7 @@ def getData(jname):
 	new_txn.vin = Jdata["valueIn"]
 	new_txn.vout = Jdata["valueOut"]
 	new_txn.time = Jdata["time"]
+	return new_txn
 
 
 def findLoop(head):
@@ -88,5 +89,6 @@ def findLoop(head):
 			return True
 
 if __name__ == "__main__":
-
+	with open("test.json") as jname
+		new_txn = getData(jname)
 	

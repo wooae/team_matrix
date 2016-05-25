@@ -56,6 +56,22 @@ class TxnList(object):
 		"""
 		return sorted(txns, key=txns[1])
 
+def getData(jname):
+	"""
+	Transform json data into Txn object format
+	"""
+	Jdata = json.loads(jname)
+	new_txn = Txn()
+	for txn in Jdata["vin"]:
+		new_txn.addrin.append(Jdata["addr"])
+	for txn in Jdata["vout"]:
+		for i in Jdata["scriptPubKey"]:
+			new_txn.addrout.append(Jdata["addresses"])
+	new_txn.vin = Jdata["valueIn"]
+	new_txn.vout = Jdata["valueOut"]
+	new_txn.time = Jdata["time"]
+
+
 def findLoop(head):
 	turtle = head
 	hare = head
